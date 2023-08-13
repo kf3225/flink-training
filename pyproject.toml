@@ -1,0 +1,26 @@
+[project]
+name = "flink-training"
+version = "0.1.0"
+description = "Add a short description here"
+authors = [
+    { name = "kf3225", email = "gallamond.k@tbz.t-com.ne.jp" }
+]
+dependencies = [
+    "apache-flink~=1.17.1",
+    "pydantic~=2.1.1",
+]
+readme = "README.md"
+requires-python = ">= 3.10"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = [
+    "pytest~=7.4.0",
+]
+
+[tool.hatch.metadata]
+allow-direct-references = true
