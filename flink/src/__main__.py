@@ -3,8 +3,8 @@ import logging
 import sys
 
 from pyflink.common import Row
-from pyflink.table import EnvironmentSettings, TableEnvironment, TableDescriptor, Schema, DataTypes, FormatDescriptor
-from pyflink.table.expressions import lit, col
+from pyflink.table import DataTypes, EnvironmentSettings, FormatDescriptor, Schema, TableDescriptor, TableEnvironment
+from pyflink.table.expressions import col, lit
 from pyflink.table.udf import udtf
 
 word_count_data = [
@@ -66,7 +66,8 @@ def word_count(input_path, output_path):
         print("Executing word_count example with default input data set.")
         print("Use --input to specify file input.")
         tab = t_env.from_elements(
-            map(lambda i: (i,), word_count_data), DataTypes.ROW([DataTypes.FIELD("line", DataTypes.STRING())])
+            map(lambda i: (i,), word_count_data),
+            DataTypes.ROW([DataTypes.FIELD("line", DataTypes.STRING())]),
         )
 
     # define the sink
@@ -107,7 +108,12 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", dest="input", required=False, help="Input file to process.")
-    parser.add_argument("--output", dest="output", required=False, help="Output file to write results to.")
+    parser.add_argument(
+        "--output",
+        dest="output",
+        required=False,
+        help="Output file to write results to.",
+    )
 
     argv = sys.argv[1:]
     known_args, _ = parser.parse_known_args(argv)

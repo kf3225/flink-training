@@ -1,0 +1,55 @@
+[project]
+name = "flink"
+version = "0.1.0"
+description = "Add a short description here"
+authors = [
+    { name = "kf3225", email = "gallamond.k@tbz.t-com.ne.jp" }
+]
+dependencies = [
+    "apache-flink~=1.17.1",
+    "pydantic~=2.1.1",
+    "setuptools~=68.0.0",
+]
+readme = "README.md"
+requires-python = ">= 3.10"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = [
+    "pytest~=7.4.0",
+    "black~=23.7.0",
+    "isort~=5.12.0",
+    "pyproject-flake8~=6.0.0.post1",
+]
+
+[tool.black]
+line-length = 120
+
+[tool.isort]
+profile = "black"
+line_length = 120
+multi_line_output = 3
+include_trailing_comma = true
+use_parentheses = true
+
+[tool.flake8]
+max-line-length = 120
+max-complexity = 18
+ignore = "E203,E266,W503,"
+
+[tool.rye.scripts]
+format = { chain = ["format:black", "format:isort"] }
+"format:black" = "black ."
+"format:isort" = "isort ."
+
+lint = { chain = ["lint:black", "lint:isort", "lint:flake8"] }
+"lint:black" = "black --check ."
+"lint:isort" = "isort --check ."
+"lint:flake8" = "flake8 ."
+
+[tool.hatch.metadata]
+allow-direct-references = true
