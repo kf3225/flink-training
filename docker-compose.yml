@@ -1,0 +1,53 @@
+version: '3.4'
+services:
+  zookeeper-0:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: zookeeper
+      args:
+        - MY_ID=1
+
+  zookeeper-1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: zookeeper
+      args:
+        - MY_ID=2
+
+  zookeeper-2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: zookeeper
+      args:
+        - MY_ID=3
+
+  broker-0:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: broker
+      args:
+        - BROKER_ID=0
+
+  broker-1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: broker
+      args:
+        - BROKER_ID=1
+
+  producer-0:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: producer
+
+  producer-1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: producer
